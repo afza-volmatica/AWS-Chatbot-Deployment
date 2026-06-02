@@ -1,16 +1,13 @@
 services:
-
   backend:
-    build:
-      context: ./backend
+    image: 723322847888.dkr.ecr.ap-southeast-2.amazonaws.com/chatbot-backend:latest
     container_name: chatbot-backend
     ports:
       - "8000:8000"
     restart: unless-stopped
 
   frontend:
-    build:
-      context: ./frontend
+    image: 723322847888.dkr.ecr.ap-southeast-2.amazonaws.com/chatbot-frontend:latest
     container_name: chatbot-frontend
     ports:
       - "8501:8501"

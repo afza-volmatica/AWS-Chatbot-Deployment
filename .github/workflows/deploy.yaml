@@ -1,4 +1,4 @@
-name: Deploy to EC2
+name: CI/CD Pipeline
 
 on:
   push:
@@ -6,7 +6,30 @@ on:
       - main
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.11"
+
+    - name: Install Dependencies
+      run: |
+        cd backend
+        pip install -r requirements.txt
+
+    - name: Run Tests
+      run: |
+        cd backend
+        python -m pytest
+
   deploy:
+    needs: test
     runs-on: ubuntu-latest
 
     steps:
